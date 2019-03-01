@@ -1,8 +1,10 @@
 package br.com.mongoblogs.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -10,36 +12,36 @@ import java.util.List;
 public class Post
 {
     @Id
-    protected String id;
+    protected ObjectId id;
     protected String title;
-    protected List<Session> sessions;
+    protected List<Section> sections;
     protected Date publishedAt;
 
     public Post()
     {
     }
 
-    public Post(String id, String title, List<Session> sessions, Date publishedAt)
+    public Post(ObjectId id, String title, List<Section> sections, Date publishedAt)
     {
         this.id = id;
         this.title = title;
-        this.sessions = sessions;
+        this.sections = sections;
         this.publishedAt = publishedAt;
     }
 
-    public Post(String title, List<Session> sessions, Date publishedAt)
+    public Post(String title, List<Section> sections, Date publishedAt)
     {
         this.title = title;
-        this.sessions = sessions;
+        this.sections = sections;
         this.publishedAt = publishedAt;
     }
 
-    public String getId()
+    public ObjectId getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(ObjectId id)
     {
         this.id = id;
     }
@@ -54,23 +56,33 @@ public class Post
         this.title = title;
     }
 
-    public List<Session> getSessions()
+    public List<Section> getSections()
     {
-        return sessions;
+        return sections;
     }
 
-    public void setSessions(List<Session> sessions)
+    public void setSections(List<Section> sections)
     {
-        this.sessions = sessions;
+        this.sections = sections;
     }
 
-    public Date getPublishedAt()
+    public String getPublishedAt()
     {
-        return publishedAt;
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(publishedAt);
     }
 
     public void setPublishedAt(Date publishedAt)
     {
         this.publishedAt = publishedAt;
+    }
+
+    @Override
+    public String toString()
+    {
+        final String[] string = {"Post _id: " + id + " - " + title + ": " + publishedAt + "\n"};
+
+        sections.forEach(section -> string[0] += section);
+
+        return string[0];
     }
 }

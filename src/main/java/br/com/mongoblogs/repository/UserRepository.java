@@ -1,9 +1,10 @@
 package br.com.mongoblogs.repository;
 
 import br.com.mongoblogs.model.User;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends MongoRepository<User, Integer>
+public interface UserRepository extends MongoRepository<User, String>
 {
-    User findById(String id);
+    User findById(ObjectId id);
 }

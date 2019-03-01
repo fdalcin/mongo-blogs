@@ -1,5 +1,6 @@
 package br.com.mongoblogs.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,17 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User
 {
     @Id
-    private String id;
-    private String firstname;
-    private String lastname;
-    private String username;
-    private String password;
+    protected ObjectId id;
+    protected String firstname;
+    protected String lastname;
+    protected String username;
+    protected String password;
 
     public User()
     {
     }
 
-    public User(String id, String firstname, String lastname, String username, String password)
+    public User(ObjectId id, String firstname, String lastname, String username, String password)
     {
         this.id = id;
         this.firstname = firstname;
@@ -26,12 +27,20 @@ public class User
         this.password = password;
     }
 
-    public String getId()
+    public User(String firstname, String lastname, String username, String password)
+    {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+    }
+
+    public ObjectId getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(ObjectId id)
     {
         this.id = id;
     }
@@ -54,6 +63,11 @@ public class User
     public void setLastname(String lastname)
     {
         this.lastname = lastname;
+    }
+
+    public String getFullname()
+    {
+        return firstname + ' ' + lastname;
     }
 
     public String getUsername()

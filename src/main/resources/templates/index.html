@@ -6,5 +6,13 @@
 </head>
 <body>
 <h1>Home</h1>
+<div class="blog" th:each="blog: ${blogs}">
+    <h4 th:text="${blog.getTitle()}"/>
+    <small th:text="${blog.getDescription()}"/>
+
+    <div class="post" th:each="post: ${blog.getPosts()}">
+        <h5 th:text="${post.getTitle() + ' - ' + post.getPublishedAt()}"/>
+    </div>
+</div>
 </body>
 </html>
