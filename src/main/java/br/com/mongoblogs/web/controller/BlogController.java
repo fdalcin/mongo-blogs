@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BlogController {
 
 
-    @GetMapping("/")
+    @GetMapping("/cadastrar")
     public String index()
     {
-        return "blog";
+        return "/blogs/cadastro";
     }
 }

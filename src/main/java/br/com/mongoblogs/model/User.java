@@ -3,7 +3,6 @@ package br.com.mongoblogs.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -20,19 +19,7 @@ public class User implements UserDetails {
     private String password;
     private List<GrantedAuthority> grantedAuthorities;
 
-    public User(String username, String password, String[] authorities) {
-        this.username = username;
-        this.password = password;
-        this.grantedAuthorities = AuthorityUtils.createAuthorityList(authorities);
-    }
-
-    public User(String id, String firstname, String lastname, String username, String password)
-    {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.password = password;
+    public User() {
     }
 
     @Override
