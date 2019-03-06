@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Mongo Blogs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Blogs with MongoDB" />
+    <meta name="author" content="Felipe Dalcin && Yan Venera" />
+    <link rel="icon" th:href="@{/image/favicon.png}" />
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+
+</head>
+<body>
+    <header th:replace="fragments/header :: header">
+        <div>header</div>
+    </header>
+
+    <div class="layout-main">
+        <aside>
+            <nav th:replace="fragments/sidebar :: nav-sidebar">
+                <span>menu</span>
+            </nav>
+        </aside>
+
+        <section layout:fragment="content">
+            <div>Main content page</div>
+        </section>
+    </div>
+
+    <footer th:replace="fragments/footer :: footer">
+        <div>footer</div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript and Jquery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
