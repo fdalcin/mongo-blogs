@@ -1,4 +1,4 @@
-package br.com.mongoblogs.web.controller;
+package br.com.mongoblogs.controller;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
