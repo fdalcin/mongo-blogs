@@ -1,5 +1,6 @@
 package br.com.mongoblogs.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,16 +13,33 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    private String id;
-    private String firstname;
-    private String lastname;
-    private String username;
-    private String password;
+    protected ObjectId id;
+    protected String firstname;
+    protected String lastname;
+    protected String username;
+    protected String password;
     private List<GrantedAuthority> grantedAuthorities;
 
     public User() {
     }
 
+    public User(ObjectId id, String firstname, String lastname, String username, String password)
+    {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String firstname, String lastname, String username, String password)
+    {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+    }
+  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.grantedAuthorities;
@@ -47,12 +65,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    public String getId()
+    public ObjectId getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(ObjectId id)
     {
         this.id = id;
     }
@@ -75,6 +93,11 @@ public class User implements UserDetails {
     public void setLastname(String lastname)
     {
         this.lastname = lastname;
+    }
+
+    public String getFullname()
+    {
+        return firstname + ' ' + lastname;
     }
 
     public String getUsername()
