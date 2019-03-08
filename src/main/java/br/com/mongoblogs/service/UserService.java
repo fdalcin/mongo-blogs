@@ -20,9 +20,13 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void save(User user){
+    public void save(User user, String passwordConfirm) throws Exception{
+        user.setId(null);
+        user.setGrantedAuthorities(getDefaultAuthority());
+
+        userValidate(user,passwordConfirm);
+
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setGrantedAuthorities(getDefaltAuthority());
         userRepository.save(user);
     }
 
@@ -30,10 +34,28 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    private List<GrantedAuthority> getDefaltAuthority(){
+    private List<GrantedAuthority> getDefaultAuthority(){
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ADMIN"));
         return authorities;
+    }
+
+    private void userValidate(User user, String passwordConfirm) throws Exception{
+        if(user.getPassword() == null || user.getUsername() == null || user.getFirstname() == null || user.getLastname() == null){
+            throw new Exception("All field's required.");
+        }
+        if(user.getPassword().length() < 8){
+            throw new Exception("Password must be at least 8 characters.");
+        }
+        if(!user.getPassword().equals(passwordConfirm)){
+            throw new Exception("Password's are diverged.");
+        }
+        if(user.getAuthorities() == null || user.getAuthorities().size() == 0){
+            throw new Exception("Please, set authorities for this user.");
+        }
+        if(userRepository.findByUsername(user.getUsername()) != null){
+            throw new Exception("This username already in use.");
+        }
     }
 
 }

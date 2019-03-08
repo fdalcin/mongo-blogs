@@ -9,9 +9,7 @@ public class StringToObjectId implements Converter<String, ObjectId> {
 
     @Override
     public ObjectId convert(String s) {
-
         ObjectId objectId = new ObjectId(s.trim());
-
         return objectId;
     }
 }

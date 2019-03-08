@@ -20,20 +20,10 @@
     </header>
 
     <div class="layout-main">
-        <aside>
-            <nav th:replace="fragments/sidebar :: nav-sidebar">
-                <span>menu</span>
-            </nav>
-        </aside>
-
         <section layout:fragment="content">
             <div>Main content page</div>
         </section>
     </div>
-
-    <footer th:replace="fragments/footer :: footer">
-        <div>footer</div>
-    </footer>
 
     <!-- Bootstrap core JavaScript and Jquery -->
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>

@@ -1,6 +1,5 @@
 package br.com.mongoblogs.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -15,10 +14,10 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String firstname;
     private String lastname;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+    @Indexed(name="username_index" ,unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String username;
     private String password;
     private List<GrantedAuthority> grantedAuthorities;
@@ -51,11 +50,11 @@ public class User implements UserDetails {
         return true;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
