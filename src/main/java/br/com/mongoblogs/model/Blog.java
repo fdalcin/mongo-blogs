@@ -1,6 +1,5 @@
 package br.com.mongoblogs.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,84 +10,53 @@ import java.util.List;
 public class Blog implements Serializable
 {
     @Id
-    protected ObjectId id;
-    protected String title;
-    protected String description;
-    protected User user;
-    protected List<Post> posts;
+    private String id;
+    private String title;
+    private String description;
+    private User user;
+    private List<Post> posts;
 
     public Blog()
     {
     }
 
-    public Blog(ObjectId id, String title, String description, User user, List<Post> posts)
-    {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.user = user;
-        this.posts = posts;
-    }
-
-    public Blog() {
-    }
-
     public String getId() {
-    public Blog(String title, String description, User user, List<Post> posts)
-    {
-        this.title = title;
-        this.description = description;
-        this.user = user;
-        this.posts = posts;
-    }
-
-    public ObjectId getId()
-    {
         return id;
     }
 
-    public void setId(ObjectId id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public List<Post> getPosts()
-    {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts)
-    {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 

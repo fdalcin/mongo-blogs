@@ -1,6 +1,5 @@
 package br.com.mongoblogs.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,37 +11,20 @@ import java.util.List;
 public class Post
 {
     @Id
-    protected ObjectId id;
-    protected String title;
-    protected List<Section> sections;
-    protected Date publishedAt;
+    private String id;
+    private String title;
+    private List<Section> sections;
+    private Date publishedAt;
 
     public Post()
     {
     }
 
-    public Post(ObjectId id, String title, List<Section> sections, Date publishedAt)
-    {
-        this.id = id;
-        this.title = title;
-        this.sections = sections;
-        this.publishedAt = publishedAt;
-    }
-
-    public Post(String title, List<Section> sections, Date publishedAt)
-    {
-        this.title = title;
-        this.sections = sections;
-        this.publishedAt = publishedAt;
-    }
-
-    public ObjectId getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 

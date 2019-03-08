@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface BlogRepository extends MongoRepository<Blog, String>
 {
-    Blog findById(ObjectId id);
-
     @Query("{'user._id': ?0}")
     List<Blog> findByUser(ObjectId id);
 }
