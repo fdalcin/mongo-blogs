@@ -3,8 +3,6 @@ package br.com.mongoblogs.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Document(collection = "sections")
 public class Section
 {
@@ -12,17 +10,20 @@ public class Section
     private String id;
     private String title;
     private String content;
-    private List<Section> sections;
+    private String postId;
+    private String parentSectionId;
 
     public Section()
     {
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id)
+    {
         this.id = id;
     }
 
@@ -46,25 +47,23 @@ public class Section
         this.content = content;
     }
 
-    public List<Section> getSections()
+    public String getPostId()
     {
-        return sections;
+        return postId;
     }
 
-    public void setSections(List<Section> sections)
+    public void setPostId(String postId)
     {
-        this.sections = sections;
+        this.postId = postId;
     }
 
-    @Override
-    public String toString()
+    public String getParentSectionId()
     {
-        final String[] string = {"Section _id: " + id + " - " + title + ": " + content + "\n"};
+        return parentSectionId;
+    }
 
-        if (sections != null) {
-            sections.forEach(section -> string[0] += section);
-        }
-
-        return string[0];
+    public void setParentSectionId(String parentSectionId)
+    {
+        this.parentSectionId = parentSectionId;
     }
 }

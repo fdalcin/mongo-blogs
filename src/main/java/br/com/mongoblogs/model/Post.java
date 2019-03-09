@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "posts")
 public class Post
@@ -13,18 +12,20 @@ public class Post
     @Id
     private String id;
     private String title;
-    private List<Section> sections;
+    private String blogId;
     private Date publishedAt;
 
     public Post()
     {
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id)
+    {
         this.id = id;
     }
 
@@ -38,16 +39,6 @@ public class Post
         this.title = title;
     }
 
-    public List<Section> getSections()
-    {
-        return sections;
-    }
-
-    public void setSections(List<Section> sections)
-    {
-        this.sections = sections;
-    }
-
     public String getPublishedAt()
     {
         return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(publishedAt);
@@ -58,13 +49,13 @@ public class Post
         this.publishedAt = publishedAt;
     }
 
-    @Override
-    public String toString()
+    public String getBlogId()
     {
-        final String[] string = {"Post _id: " + id + " - " + title + ": " + publishedAt + "\n"};
+        return blogId;
+    }
 
-        sections.forEach(section -> string[0] += section);
-
-        return string[0];
+    public void setBlogId(String blogId)
+    {
+        this.blogId = blogId;
     }
 }

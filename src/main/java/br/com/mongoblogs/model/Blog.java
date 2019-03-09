@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Document(collection = "blogs")
 public class Blog implements Serializable
@@ -13,61 +12,60 @@ public class Blog implements Serializable
     private String id;
     private String title;
     private String description;
-    private User user;
-    private List<Post> posts;
+    private String userId;
+    private String username;
 
     public Blog()
     {
     }
 
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(String id)
+    {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    @Override
-    public String toString()
+    public String getUserId()
     {
-        final String[] string = {"Blog _id: " + id + " - " + title + ": " + description + "\n"};
-        string[0] += "Owner: " + user.getFullname() + "\n\n";
+        return userId;
+    }
 
-        posts.forEach(post -> string[0] += post);
+    public void setUserId(String userId)
+    {
+        this.userId = userId;
+    }
 
-        return string[0];
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
 }
