@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 
     <head>
         <meta charset="UTF-8"/>
     </head>
 
     <body>
-        <h1>Cadastro de blogs</h1>
         <section class="layout-content" layout:fragment="content">
+            <div id="container" class="container">
+                <div class="col-sm-6 offset-sm-3 text-center">
+                    <h1 class="display-4">Blog Register</h1>
 
+                    <div th:replace="fragments/alert"></div>
+
+                    <form th:action="${blog.id == null} ? @{/blogs/save} : @{/blogs/edit}" th:object="${blog}"
+                      method="post" class="justify-content-center">
+
+                    <input type="hidden"  th:field="*{id}">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Title" th:field="*{title}">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="description" id="description" placeholder="Description" th:field="*{description}">
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" name="action" value="save" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+                </div>
+            </div>
         </section>
     </body>
 </html>
+
