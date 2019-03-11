@@ -21,7 +21,6 @@ public class HomeController
     public String index(ModelMap model)
     {
         List<Blog> blogs = this.blogRepository.findAll();
-
         model.addAttribute("blogs", blogs);
 
         return "index";

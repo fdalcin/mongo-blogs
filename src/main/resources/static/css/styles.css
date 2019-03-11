@@ -5,3 +5,7 @@ footer {
     position: absolute;
     width: 100vw;
 }
+
+header {
+    margin-bottom : 5px;
+}
