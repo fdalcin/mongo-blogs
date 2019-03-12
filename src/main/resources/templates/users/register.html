@@ -11,7 +11,7 @@
         <section class="layout-content" layout:fragment="content">
             <div id="container" class="container">
                 <div class="col-sm-6 offset-sm-3 text-center">
-                    <h1 class="display-4">Register</h1>
+                    <h1 class="display-4">User Register</h1>
 
                     <div th:replace="fragments/alert"></div>
 
@@ -26,7 +26,8 @@
                             <input type="text" class="form-control" name="lastName"  id="lastName" placeholder="Last Name" th:field="*{lastname}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" th:field="*{username}">
+                            <input type="text" class="form-control" name="username" th:disabled="${user.id != null}"
+                                   id="username" placeholder="Username" th:field="*{username}">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password" th:field="*{password}">
