@@ -16,7 +16,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="dropdown" sec:authorize="isAnonymous()">
+                    <div class="nav-item dropdown" sec:authorize="isAnonymous()">
                         <a class="btn btn-secondary dropdown-toggle" href="#"
                            role="button" id="dropdownAnonymous"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -24,12 +24,12 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownAnonymous">
-                            <a th:href="@{/login}" class="dropdown-item" type="button">Sing in</a>
-                            <a th:href="@{/users/register}" class="dropdown-item" type="button">Register</a>
+                            <a th:href="@{/login}" class="dropdown-item">Sing in</a>
+                            <a th:href="@{/users/register}" class="dropdown-item">Register</a>
                         </div>
                     </div>
 
-                    <div class="dropdown" sec:authorize="isAuthenticated()">
+                    <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
                         <a class="btn btn-secondary dropdown-toggle" href="#"
                            role="button" id="dropdownAuthenticated"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,8 +37,8 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownAuthenticated">
-                            <a th:href="@{/users/edit}" class="dropdown-item" type="button">Edit</a>
-                            <a th:href="@{/logout}" class="dropdown-item" type="button">Logout</a>
+                            <a th:href="@{/users/edit}" class="dropdown-item">Edit</a>
+                            <a th:href="@{/logout}" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </form>
