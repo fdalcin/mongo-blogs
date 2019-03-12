@@ -20,24 +20,24 @@
                         <input type="hidden"  th:field="*{id}">
 
                         <div class="form-group">
-                            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" th:field="*{firstname}">
+                            <input required="required" type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" th:field="*{firstname}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="lastName"  id="lastName" placeholder="Last Name" th:field="*{lastname}">
+                            <input required="required" type="text" class="form-control" name="lastName"  id="lastName" placeholder="Last Name" th:field="*{lastname}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" th:disabled="${user.id != null}"
+                            <input required="required" type="text" class="form-control" name="username" th:disabled="${user.id != null}"
                                    id="username" placeholder="Username" th:field="*{username}">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" th:field="*{password}">
+                            <input required="required" type="password" class="form-control" name="password" id="password" placeholder="Password" th:field="*{password}">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="Confirm Password">
+                            <input required="required" type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="Confirm Password">
                         </div>
 
                         <div class="btn-group">
-                            <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel</button>
+                            <a class="btn btn-danger" title="Cancel" th:href="@{/}">Cancel</a>
                         </div>
                         <div class="btn-group">
                             <button type="submit" name="action" value="save" class="btn btn-primary">Register</button>

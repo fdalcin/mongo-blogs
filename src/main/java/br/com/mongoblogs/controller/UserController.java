@@ -3,6 +3,7 @@ package br.com.mongoblogs.controller;
 import br.com.mongoblogs.model.User;
 import br.com.mongoblogs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
@@ -23,6 +26,11 @@ public class UserController {
     @GetMapping("/register")
     public String register(User user)
     {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && !"anonymousUser".equals(authentication.getPrincipal())){
+            return "redirect:/";
+        }
+
         return "/users/register";
     }
 
@@ -35,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping(value="/save", params = "action=save")
-    public String save(User user, @RequestParam("passwordConfirm") String passwordConfirm, BindingResult result, RedirectAttributes attr){
+    public String save(@Valid User user, @RequestParam("passwordConfirm") String passwordConfirm, BindingResult result, RedirectAttributes attr){
         if(result.hasErrors()){
             return "redirect:/users/register";
         }
@@ -57,10 +65,4 @@ public class UserController {
 
         return "redirect:/users/register";
     }
-
-    @PostMapping(value="/save", params = "action=cancel")
-    public String saveCancel(){
-        return "redirect:/";
-    }
-
 }

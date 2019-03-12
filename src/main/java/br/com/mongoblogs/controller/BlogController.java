@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -58,7 +59,7 @@ public class BlogController {
     }
 
     @PostMapping(value="/save", params = "action=save")
-    public String save(Blog blog, BindingResult result, RedirectAttributes attr){
+    public String save(@Valid Blog blog, BindingResult result, RedirectAttributes attr){
         if(result.hasErrors()){
             return "/blogs/register";
         }
@@ -78,10 +79,5 @@ public class BlogController {
         }
 
         return "redirect:/blogs/register";
-    }
-
-    @PostMapping(value="/save", params = "action=cancel")
-    public String saveCancel(){
-        return "redirect:/";
     }
 }
