@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/blogs")
@@ -79,5 +80,20 @@ public class BlogController {
         }
 
         return "redirect:/blogs/register";
+    }
+
+    @GetMapping("/{id}/posts")
+    public String show(@PathVariable("id") String id, ModelMap model)
+    {
+        Optional<Blog> result = blogRepository.findById(id);
+
+        // TODO: orElse should redirect to 404 page
+
+        return result.map(blog -> {
+            model.addAttribute("blog", blog);
+
+            //TODO: load posts for the blog
+            return "/posts/list";
+        }).orElse("redirect:/");
     }
 }

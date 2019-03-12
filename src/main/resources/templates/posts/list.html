@@ -11,7 +11,7 @@
         <section class="layout-content" layout:fragment="content">
             <div id="container" class="container">
                 <div class="col-sm-8 offset-sm-2 text-center">
-                    <h1 class="display-4">Blog List</h1>
+                    <h1 class="display-4">Post List</h1>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -23,14 +23,22 @@
                         <tbody>
                             <tr th:each="post : ${posts}">
                                 <td scope="col" th:text="${post.title}">Title</td>
-                                <td scope="col" th:text="${post.publishedAt}">Description</td>
+                                <td scope="col" th:text="${post.publishedAt}">Data</td>
                                 <td scope="col" >
-                                    <a class="fas fa-edit" title="Edit Blog" th:href="@{edit/{id} (id=${blog.id})}"></a>
-                                    <a class="fas fa-list" title="List Posts"></a>
+                                    <div class="btn-group" role="group">
+                                        <div class="col-md-6">
+                                            <a class="fas fa-2x fa-edit" title="Edit Post" th:href="@{/posts/edit/{id} (id=${post.id})}"></a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="text-right" role="group">
+                        <div class="col-md-12">
+                            <a class="btn btn-success" title="Add post" th:href="@{/posts/register/{blogId} (blogId=${blog.id})}">New Post</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -24,9 +24,15 @@
                             <tr th:each="blog : ${blogs}">
                                 <td scope="col" th:text="${blog.title}">Title</td>
                                 <td scope="col" th:text="${blog.description}">Description</td>
-                                <td scope="col" >
-                                    <a class="fas fa-edit" title="Edit Blog" th:href="@{edit/{id} (id=${blog.id})}"></a>
-                                    <a class="fas fa-list" title="List Posts"></a>
+                                <td scope="col">
+                                    <div class="btn-group" role="group">
+                                        <div class="col-md-6">
+                                            <a class="fas fa-2x fa-edit" title="Edit Blog" th:href="@{edit/{id} (id=${blog.id})}"></a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a class="fas fa-2x fa-list" title="List Posts" th:href="@{/posts/list/{blogId} (blogId=${blog.id})}"></a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

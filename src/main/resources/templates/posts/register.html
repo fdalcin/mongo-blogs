@@ -20,6 +20,13 @@
 
                     <input type="hidden"  th:field="*{id}">
 
+                    <input type="hidden"  th:field="*{blogId}">
+
+                    <div class="form-group">
+                        <input required="required" type="text" class="form-control" name="title" id="title" placeholder="Title" th:field="*{title}">
+                    </div>
+
+
 
                     <div class="btn-group">
                         <a class="btn btn-danger" title="Cancel" th:href="@{/}">Cancel</a>
