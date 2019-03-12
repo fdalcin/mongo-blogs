@@ -11,4 +11,6 @@ public interface BlogRepository extends MongoRepository<Blog, String>
 {
     @Query("{'user._id': ?0}")
     List<Blog> findByUser(ObjectId id);
+
+    List<Blog> findByUsername(String username);
 }

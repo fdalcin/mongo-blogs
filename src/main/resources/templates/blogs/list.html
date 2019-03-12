@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <section class="layout-content" layout:fragment="content">
+            <div id="container" class="container">
+                <div class="col-sm-8 offset-sm-2 text-center">
+                    <h1 class="display-4">Blog List</h1>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="blog : ${blogs}">
+                                <td scope="col" th:text="${blog.title}">Title</td>
+                                <td scope="col" th:text="${blog.description}">Description</td>
+                                <td scope="col" >
+                                    <a class="fas fa-edit" title="Edit Blog" th:href="@{edit/{id} (id=${blog.id})}"></a>
+                                    <a class="fas fa-list" title="List Posts"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+

@@ -13,11 +13,12 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
-    public void save(Blog blog) throws Exception{
-        blog.setId(null);
+    public void save(Blog blog, boolean edit) throws Exception{
+        if(!edit){
+            blog.setId(null);
+        }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         blog.setUserId(user.getId());
         blog.setUsername(user.getUsername());
 
