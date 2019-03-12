@@ -15,7 +15,7 @@
 
                     <div th:replace="fragments/alert"></div>
 
-                    <form th:action="${user.id == null} ? @{/users/save} : @{/users/edit}" th:object="${user}"
+                    <form th:action="@{/users/save}" th:object="${user}"
                           method="post" class="justify-content-center">
                         <input type="hidden"  th:field="*{id}">
 

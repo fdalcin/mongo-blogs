@@ -20,11 +20,14 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void save(User user, String passwordConfirm) throws Exception{
-        user.setId(null);
+    public void save(User user, String passwordConfirm, boolean edit) throws Exception{
+        if(!edit){
+            user.setId(null);
+        }
+
         user.setGrantedAuthorities(getDefaultAuthority());
 
-        userValidate(user,passwordConfirm);
+        userValidate(user,passwordConfirm, edit);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -40,7 +43,7 @@ public class UserService {
         return authorities;
     }
 
-    private void userValidate(User user, String passwordConfirm) throws Exception{
+    private void userValidate(User user, String passwordConfirm, boolean edit) throws Exception{
         if(user.getPassword() == null || user.getUsername() == null || user.getFirstname() == null || user.getLastname() == null){
             throw new Exception("All field's required.");
         }
@@ -53,7 +56,7 @@ public class UserService {
         if(user.getAuthorities() == null || user.getAuthorities().size() == 0){
             throw new Exception("Please, set authorities for this user.");
         }
-        if(userRepository.findByUsername(user.getUsername()) != null){
+        if(!edit && userRepository.findByUsername(user.getUsername()) != null){
             throw new Exception("This username already in use.");
         }
     }

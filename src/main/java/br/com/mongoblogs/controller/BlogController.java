@@ -26,7 +26,7 @@ public class BlogController {
     @PostMapping(value="/save", params = "action=save")
     public String save(Blog blog, BindingResult result, RedirectAttributes attr){
         if(result.hasErrors()){
-            return "redirect:/blogs/register";
+            return "/blogs/register";
         }
 
         try{
