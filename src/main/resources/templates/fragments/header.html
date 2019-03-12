@@ -10,10 +10,38 @@
                 <a class="navbar-brand d-flex align-items-center">
                     <strong>Mongo Blogs</strong>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavBar"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Navigation Menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <form class="form-inline">
+                    <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#myNavBar"
+                            aria-controls="myNavBar" aria-expanded="false" aria-label="Navigation Menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="dropdown" sec:authorize="isAnonymous()">
+                        <a class="btn btn-secondary dropdown-toggle" href="#"
+                           role="button" id="dropdownAnonymous"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Anonymous
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownAnonymous">
+                            <a th:href="@{/login}" class="dropdown-item" type="button">Sing in</a>
+                            <a th:href="@{/users/register}" class="dropdown-item" type="button">Register</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown" sec:authorize="isAuthenticated()">
+                        <a class="btn btn-secondary dropdown-toggle" href="#"
+                           role="button" id="dropdownAuthenticated"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span sec:authentication="name"> Authenticated</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownAuthenticated">
+                            <a class="dropdown-item" type="button">Edit</a>
+                            <a th:href="@{/logout}" class="dropdown-item" type="button">Logout</a>
+                        </div>
+                    </div>
+                </form>
                 <div class="collapse navbar-collapse" id="myNavBar">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
