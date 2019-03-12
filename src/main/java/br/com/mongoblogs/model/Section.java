@@ -1,69 +1,47 @@
 package br.com.mongoblogs.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
-@Document(collection = "sections")
 public class Section
 {
-    @Id
-    private String id;
     private String title;
     private String content;
     private String postId;
-    private String parentSectionId;
+    private List<Section> subSections;
 
     public Section()
     {
     }
 
-    public String getId()
-    {
-        return id;
-    }
-
-    public void setId(String id)
-    {
-        this.id = id;
-    }
-
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public String getPostId()
-    {
+    public String getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId)
-    {
+    public void setPostId(String postId) {
         this.postId = postId;
     }
 
-    public String getParentSectionId()
-    {
-        return parentSectionId;
+    public List<Section> getSubSections() {
+        return subSections;
     }
 
-    public void setParentSectionId(String parentSectionId)
-    {
-        this.parentSectionId = parentSectionId;
+    public void setSubSections(List<Section> subSections) {
+        this.subSections = subSections;
     }
 }

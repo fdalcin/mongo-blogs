@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <section class="layout-content" layout:fragment="content">
+            <div id="container" class="container">
+                <div class="col-sm-6 offset-sm-3 text-center">
+                    <h1 class="display-4">Post Register</h1>
+
+                    <div th:replace="fragments/alert"></div>
+
+                    <form th:action="@{/posts/save}" th:object="${post}"
+                      method="post" class="justify-content-center">
+
+                    <input type="hidden"  th:field="*{id}">
+
+
+                    <div class="btn-group">
+                        <a class="btn btn-danger" title="Cancel" th:href="@{/}">Cancel</a>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" name="action" value="save" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+

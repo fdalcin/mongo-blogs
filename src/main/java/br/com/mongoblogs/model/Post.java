@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "posts")
 public class Post
@@ -14,6 +15,7 @@ public class Post
     private String title;
     private String blogId;
     private Date publishedAt;
+    private List<Section> sections;
 
     public Post()
     {
@@ -57,5 +59,13 @@ public class Post
     public void setBlogId(String blogId)
     {
         this.blogId = blogId;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }
