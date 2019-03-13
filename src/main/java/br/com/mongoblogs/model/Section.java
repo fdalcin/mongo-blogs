@@ -6,7 +6,6 @@ public class Section
 {
     private String title;
     private String content;
-    private String postId;
     private List<Section> subSections;
 
     public Section()
@@ -27,14 +26,6 @@ public class Section
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
     }
 
     public List<Section> getSubSections() {

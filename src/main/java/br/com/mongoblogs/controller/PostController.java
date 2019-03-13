@@ -2,6 +2,7 @@ package br.com.mongoblogs.controller;
 
 import br.com.mongoblogs.model.Blog;
 import br.com.mongoblogs.model.Post;
+import br.com.mongoblogs.model.Section;
 import br.com.mongoblogs.model.User;
 import br.com.mongoblogs.repository.BlogRepository;
 import br.com.mongoblogs.repository.PostRepository;
@@ -11,12 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,6 +23,9 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController
 {
+    private static final String AJAX_HEADER_NAME = "X-Requested-With";
+    private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
+
     @Autowired
     private BlogRepository blogRepository;
 
@@ -90,6 +92,26 @@ public class PostController
         model.addAttribute("blog", blog);
 
         return "/posts/list";
+    }
+
+    @PostMapping(params = "addSection", path = {"/posts/register", "/posts/register/{id}"})
+    public String addSection(Post post, HttpServletRequest request) {
+        post.getSections().add(new Section());
+        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+            return "/posts/register::#sections";
+        } else {
+            return "/posts/register";
+        }
+    }
+
+    @PostMapping(value="/removeSection", params = "removeSection")
+    public String removeSection(Post post, @RequestParam("removeSection") int index, HttpServletRequest request) {
+        post.getSections().remove(index);
+        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+            return "/posts/register::#sections";
+        } else {
+            return "/posts/register";
+        }
     }
 
 }

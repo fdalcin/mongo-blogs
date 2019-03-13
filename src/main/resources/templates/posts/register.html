@@ -26,7 +26,24 @@
                         <input required="required" type="text" class="form-control" name="title" id="title" placeholder="Title" th:field="*{title}">
                     </div>
 
+                    <fieldset id="sections">
+                        <div th:each="stat : ${post.sections}">
+                            <div class="form-group">
+                                <label th:for="|order.items[${stat.index}].title|">Title</label>
+                                <input class="form-control" th:field="${post.sections[__${stat.index}__].title}" placeholder="Section Title">
+                            </div>
 
+                            <div class="form-group">
+                                <label th:for="|order.items[${stat.index}].content|">Content</label>
+                                <textarea class="form-control" th:field="${post.sections[__${stat.index}__].content}" placeholder="Section Content">Content</textarea>
+                            </div>
+
+
+                            <button class="btn btn-danger" type="button" name="removeSection" th:value="${stat.index}">Remove Section</button>
+                        </div>
+                    </fieldset>
+
+                    <button class="btn btn-success" type="button" name="addSection">Add Section</button>
 
                     <div class="btn-group">
                         <a class="btn btn-danger" title="Cancel" th:href="@{/}">Cancel</a>
@@ -37,6 +54,28 @@
                 </form>
                 </div>
             </div>
+
+            <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+
+            <script>
+                function replaceItems (html) {
+                    $('#sections').replaceWith($(html));
+                }
+
+                $('button[name="addSection"]').click(function (event) {
+                    event.preventDefault();
+                    var data = $('form').serialize();
+                    data += 'addSection';
+                    $.post('/posts', data, replaceItems);
+                });
+
+                $('button[name="removeSection"]').click(function (event) {
+                    event.preventDefault();
+                    var data = $('form').serialize();
+                    data += 'removeSection=' + $(this).val();
+                    $.post('/posts', data, replaceItems);
+                });
+            </script>
         </section>
     </body>
 </html>
