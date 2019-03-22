@@ -19,21 +19,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     MongoUserDetailsRepository mongoUserDetailsRepository;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
-    public void configAuthBuilder(AuthenticationManagerBuilder builder) throws Exception {
+    public void configAuthBuilder(AuthenticationManagerBuilder builder) throws Exception
+    {
         BCryptPasswordEncoder encoder = passwordEncoder();
         builder.userDetailsService(mongoUserDetailsRepository).passwordEncoder(encoder);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http.
-                authorizeRequests()
-                .antMatchers("/","/login", "/users/register", "/users/save", "/blogs/{id}/posts").permitAll()
+    protected void configure(HttpSecurity http) throws Exception
+    {
+        http
+                .authorizeRequests()
+                .antMatchers(
+                        "/",
+                        "/login",
+                        "/users/register",
+                        "/users/save",
+                        "/blogs/{id}/posts",
+                        "/post/{id}"
+                )
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/")
@@ -44,10 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     @Override
-    public void configure(WebSecurity web) {
-        web.
-                ignoring()
+    public void configure(WebSecurity web)
+    {
+        web
+                .ignoring()
                 .antMatchers("/css/**", "/js/**", "/image/**", "/webjars/**");
     }
-
 }
