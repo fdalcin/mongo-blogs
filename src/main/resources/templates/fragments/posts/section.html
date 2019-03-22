@@ -1,0 +1,9 @@
+<section>
+    <div th:each="section : ${sectionList}" th:class="${margin}? 'ml-2'">
+        <h5 th:text="${section.title}"/>
+
+        <p th:text="${section.content}"/>
+
+        <th:block th:insert="fragments/posts/section" th:with="sectionList=${section.sections}, margin=true"></th:block>
+    </div>
+</section>

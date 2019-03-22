@@ -20,7 +20,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/blogs")
-public class BlogController {
+public class BlogController
+{
 
     @Autowired
     private BlogService blogService;
@@ -35,11 +36,12 @@ public class BlogController {
     }
 
     @GetMapping("/edit/{id}")
-    public String preEdit(@PathVariable("id") String id, ModelMap model) {
+    public String preEdit(@PathVariable("id") String id, ModelMap model)
+    {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Blog blog = blogRepository.findById(id).get();
 
-        if(!blog.getUsername().equals(user.getUsername())){
+        if (!blog.getUsername().equals(user.getUsername())) {
             return "redirect:/";
         }
 
@@ -58,23 +60,24 @@ public class BlogController {
         return "/blogs/list";
     }
 
-    @PostMapping(value="/save", params = "action=save")
-    public String save(@Valid Blog blog, BindingResult result, RedirectAttributes attr){
-        if(result.hasErrors()){
+    @PostMapping(value = "/save", params = "action=save")
+    public String save(@Valid Blog blog, BindingResult result, RedirectAttributes attr)
+    {
+        if (result.hasErrors()) {
             return "/blogs/register";
         }
 
-        try{
+        try {
             boolean edit;
-            if(blog.getId() != null && !blog.getId().isEmpty()){
+            if (blog.getId() != null && !blog.getId().isEmpty()) {
                 edit = true;
-            }else{
+            } else {
                 edit = false;
             }
 
-            blogService.save(blog,edit);
+            blogService.save(blog, edit);
             attr.addFlashAttribute("success", "Blog registered with success!");
-        }catch (Exception exc){
+        } catch (Exception exc) {
             attr.addFlashAttribute("fail", exc.getMessage());
         }
 
