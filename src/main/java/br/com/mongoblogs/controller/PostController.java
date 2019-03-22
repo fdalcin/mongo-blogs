@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -94,14 +95,15 @@ public class PostController
         return "/posts/list";
     }
 
-    @PostMapping(params = "addSection", path = {"/posts/register", "/posts/register/{id}"})
-    public String addSection(Post post, HttpServletRequest request) {
-        post.getSections().add(new Section());
-        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
-            return "/posts/register::#sections";
-        } else {
-            return "/posts/register";
+    @RequestMapping(value="/addSection")
+    public String addSection(@ModelAttribute("post") Post post, ModelMap model) {
+        if(post.getSections() == null){
+            post.setSections(new ArrayList<>());
         }
+        Section section = new Section();
+        section.setTitle("Agora vai");
+        post.getSections().add(section);
+        return "sections";
     }
 
     @PostMapping(value="/removeSection", params = "removeSection")
