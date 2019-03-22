@@ -1,0 +1,21 @@
+<section>
+    <div th:each="post : ${postList}">
+        <div class="card bg-light mb-4">
+            <div class="card-header text-left">
+                <a th:href="@{/post/{id}(id=${post.id})}">
+                    <h3 th:text="${post.title}"/>
+                </a>
+
+                <small th:text="${post.publishedAt}"/>
+            </div>
+
+            <div class="card-body text-left">
+                <th:block th:insert="fragments/posts/section" th:with="sectionList=${post.sections}, margin=false"></th:block>
+            </div>
+
+            <div class="card-footer">
+                <a th:href="@{/post/{id}(id=${post.id})}">Continuar lendo...</a>
+            </div>
+        </div>
+    </div>
+</section>

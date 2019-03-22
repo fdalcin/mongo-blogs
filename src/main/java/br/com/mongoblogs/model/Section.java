@@ -3,28 +3,16 @@ package br.com.mongoblogs.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "sections")
+import java.util.List;
+
 public class Section
 {
-    @Id
-    private String id;
     private String title;
     private String content;
-    private String postId;
-    private String parentSectionId;
+    private List<Section> sections;
 
     public Section()
     {
-    }
-
-    public String getId()
-    {
-        return id;
-    }
-
-    public void setId(String id)
-    {
-        this.id = id;
     }
 
     public String getTitle()
@@ -47,23 +35,13 @@ public class Section
         this.content = content;
     }
 
-    public String getPostId()
+    public List<Section> getSections()
     {
-        return postId;
+        return sections;
     }
 
-    public void setPostId(String postId)
+    public void setSections(List<Section> sections)
     {
-        this.postId = postId;
-    }
-
-    public String getParentSectionId()
-    {
-        return parentSectionId;
-    }
-
-    public void setParentSectionId(String parentSectionId)
-    {
-        this.parentSectionId = parentSectionId;
+        this.sections = sections;
     }
 }

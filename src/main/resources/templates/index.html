@@ -2,46 +2,44 @@
 <html layout:decorate="~{layout}" lang="pt"
       xmlns:layout="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Mongo Blogs</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content="Blogs with MongoDB"/>
-    <meta name="author" content="Felipe Dalcin && Yan Venera"/>
-    <link rel="icon" th:href="@{/image/favicon.png}"/>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mongo Blogs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content="Blogs with MongoDB"/>
+        <meta name="author" content="Felipe Dalcin && Yan Venera"/>
+        <link rel="icon" th:href="@{/image/favicon.png}"/>
+    </head>
 
-<body>
-<div class="layout-main">
-    <section layout:fragment="content">
-        <div class="container mt-auto text-center">
-            <h1 class="display-4">Blogs</h1>
+    <body>
+        <div class="layout-main">
+            <section layout:fragment="content">
+                <div class="container mt-auto">
+                    <h1 class="display-4">Blogs</h1>
 
-            <div class="row">
-                <div class="col-sm-6 col-md-4" th:each="blog : ${blogs}">
-                    <div class="card bg-light mb-2">
-                        <div class="card-header" th:text="${blog.title}"/>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4" th:each="blog : ${blogs}">
+                            <div class="card bg-light mb-2">
+                                <div class="card-header" th:text="${blog.title}"/>
 
-                        <div class="card-body">
-                            <p class="card-text" th:text="${blog.description}"/>
+                                <div class="card-body">
+                                    <p class="card-text" th:text="${blog.description}"/>
+                                </div>
 
-                            <p class="card-text text-muted text-right">
-                                <small>
-                                    por
-                                    <a th:href="@{/users/{username}(username=${blog.username})}" th:text="${blog.username}"/>
-                                </small>
-                            </p>
-                        </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <small class="card-text">
+                                        by
+                                        <a th:href="@{/users/{username}(username=${blog.username})}" th:text="${blog.username}"/>
+                                    </small>
 
-                        <div class="card-footer text-right">
-                            <a th:href="@{/blogs/{id}/posts(id=${blog.id})}" class="btn btn-primary">Go to blog</a>
+                                    <a th:href="@{/blogs/{id}/posts(id=${blog.id})}" class="btn btn-primary">Go to blog</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
-</body>
+    </body>
 </html>
