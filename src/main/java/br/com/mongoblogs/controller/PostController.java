@@ -26,8 +26,6 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController
 {
-    private static final String AJAX_HEADER_NAME = "X-Requested-With";
-    private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
 
     @Autowired
     private BlogRepository blogRepository;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <section class="layout-content" layout:fragment="content">
+            <div id="container" class="container">
+                <div class="col-sm-12">
+                    <h1 class="display-4" th:text="${blog.title}"></h1>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <th:block th:insert="fragments/posts/post" th:with="postList=${posts}"></th:block>
+                            <h6 th:if="${posts.isEmpty()}" th:text="'No posts found for ' + ${blog.title}"/>
+                        </div>
+
+                    <div class="col-md-3">
+                        <div class="card bg-light">
+                            <div class="card-header text-left">Recents</div>
+
+                        <div class="card-body">
+                            <th:block th:insert="fragments/recent/post" th:with="postList=${recentPosts}"></th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

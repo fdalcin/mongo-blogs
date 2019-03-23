@@ -1,8 +1,10 @@
 package br.com.mongoblogs.controller;
 
 import br.com.mongoblogs.model.Blog;
+import br.com.mongoblogs.model.Post;
 import br.com.mongoblogs.model.User;
 import br.com.mongoblogs.repository.BlogRepository;
+import br.com.mongoblogs.repository.PostRepository;
 import br.com.mongoblogs.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,9 @@ public class BlogController
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @GetMapping("/register")
     public String blogRegister(Blog blog)
@@ -89,14 +94,16 @@ public class BlogController
     public String show(@PathVariable("id") String id, ModelMap model)
     {
         Optional<Blog> result = blogRepository.findById(id);
+        List<Post> posts = postRepository.findByBlogId(id);
 
         // TODO: orElse should redirect to 404 page
 
         return result.map(blog -> {
             model.addAttribute("blog", blog);
+            model.addAttribute("posts", posts);
 
             //TODO: load posts for the blog
-            return "/posts/list";
+            return "/posts/listPublic";
         }).orElse("redirect:/");
     }
 }
