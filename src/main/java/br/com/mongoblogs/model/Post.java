@@ -68,4 +68,5 @@ public class Post
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }
+
 }

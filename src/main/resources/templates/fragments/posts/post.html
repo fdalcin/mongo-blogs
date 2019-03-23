@@ -2,7 +2,7 @@
     <div th:each="post : ${postList}">
         <div class="card bg-light mb-4">
             <div class="card-header text-left">
-                <a th:href="@{/post/{id}(id=${post.id})}">
+                <a th:href="@{/posts/post/{id}(id=${post.id})}">
                     <h3 th:text="${post.title}"/>
                 </a>
 
@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-footer">
-                <a th:href="@{/post/{id}(id=${post.id})}">Continuar lendo...</a>
+                <a th:href="@{/posts/post/{id}(id=${post.id})}">Read...</a>
             </div>
         </div>
     </div>

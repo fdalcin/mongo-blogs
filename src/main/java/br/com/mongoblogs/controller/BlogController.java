@@ -95,12 +95,14 @@ public class BlogController
     {
         Optional<Blog> result = blogRepository.findById(id);
         List<Post> posts = postRepository.findByBlogId(id);
+        List<Post> recentPosts = postRepository.findByBlogIdOrderByPublishedAtDesc(id);
 
         // TODO: orElse should redirect to 404 page
 
         return result.map(blog -> {
             model.addAttribute("blog", blog);
             model.addAttribute("posts", posts);
+            model.addAttribute("recentPosts", recentPosts);
 
             //TODO: load posts for the blog
             return "/posts/listPublic";

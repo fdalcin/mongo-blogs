@@ -10,17 +10,18 @@ import br.com.mongoblogs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/posts")
@@ -53,6 +54,23 @@ public class PostController
         attr.addFlashAttribute("success", "Post registered with success!");
 
         return "redirect:/posts/register/"+post.getBlogId();
+    }
+
+    @GetMapping("/post/{id}")
+    public String show(@PathVariable("id") String id, ModelMap model) {
+        Optional<Post> optionalPost = postRepository.findById(id);
+
+        // TODO: orElse should redirect to 404 page
+        return optionalPost.map(post -> {
+            Optional<Blog> blog = blogRepository.findById(post.getBlogId());
+            List<Post> recentPosts = postRepository.findFirst5ByOrderByPublishedAtDesc();
+
+            model.addAttribute("post", post);
+            model.addAttribute("blog", blog.orElse(null));
+            model.addAttribute("recentPosts", recentPosts);
+
+            return "/posts/show";
+        }).orElse("redirect:/");
     }
 
     @GetMapping("/register/{blogId}")

@@ -8,4 +8,8 @@ import java.util.List;
 public interface PostRepository extends MongoRepository<Post, String> {
 
     List<Post> findByBlogId(String blogId);
+
+    List<Post> findFirst5ByOrderByPublishedAtDesc();
+
+    List<Post> findByBlogIdOrderByPublishedAtDesc(String blogId);
 }
