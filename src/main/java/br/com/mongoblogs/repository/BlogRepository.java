@@ -13,4 +13,7 @@ public interface BlogRepository extends MongoRepository<Blog, String>
     List<Blog> findByUser(ObjectId id);
 
     List<Blog> findByUsername(String username);
+
+    List<Blog> findAllByOrderByLastPublishedDesc();
+
 }

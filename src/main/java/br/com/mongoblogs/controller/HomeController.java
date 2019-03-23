@@ -20,7 +20,8 @@ public class HomeController
     @GetMapping("/")
     public String index(ModelMap model)
     {
-        List<Blog> blogs = this.blogRepository.findAll();
+        List<Blog> blogs = this.blogRepository.findAllByOrderByLastPublishedDesc();
+
         model.addAttribute("blogs", blogs);
 
         return "index";

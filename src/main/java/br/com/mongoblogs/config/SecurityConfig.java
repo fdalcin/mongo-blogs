@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/users/register",
                         "/users/save",
                         "/blogs/{id}/posts",
-                        "/post/{id}"
+                        "/posts/post/{id}"
                 )
                 .permitAll()
                 .anyRequest().authenticated()
