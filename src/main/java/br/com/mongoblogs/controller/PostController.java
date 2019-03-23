@@ -10,9 +10,11 @@ import br.com.mongoblogs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,25 +97,20 @@ public class PostController
         return "/posts/list";
     }
 
-    @RequestMapping(value="/addSection")
-    public String addSection(@ModelAttribute("post") Post post, ModelMap model) {
+    @PostMapping(value="/addSection")
+    public String addSection(Post post) {
         if(post.getSections() == null){
             post.setSections(new ArrayList<>());
         }
         Section section = new Section();
-        section.setTitle("Agora vai");
         post.getSections().add(section);
-        return "sections";
+        return "/posts/register :: #sections";
     }
 
-    @PostMapping(value="/removeSection", params = "removeSection")
-    public String removeSection(Post post, @RequestParam("removeSection") int index, HttpServletRequest request) {
+    @PostMapping(value="/removeSection")
+    public String removeSection(Post post,int index) {
         post.getSections().remove(index);
-        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
-            return "/posts/register::#sections";
-        } else {
-            return "/posts/register";
-        }
+        return "/posts/register :: #sections";
     }
 
 }
